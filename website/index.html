@@ -98,6 +98,8 @@
   .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .btn-primary{background:var(--accent);color:#062b27;border-color:var(--accent)}
   .btn-primary:hover{background:#4ee2cf}
+  .btn:not(.btn-primary){color:var(--tx-1)}
+  .btn:not(.btn-primary):hover{color:var(--tx-0);border-color:var(--tx-2)}
   .dl-meta{font-family:var(--f-mono);font-size:.76rem;color:var(--tx-2);margin-top:16px}
 
   /* ---- track-list feature rows ---- */
@@ -431,8 +433,9 @@
         <svg viewBox="0 0 24 24"><path d="M12 3v10m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
         <span id="dl-win-label">Download for Windows</span>
       </a>
+      <a class="btn" href="https://github.com/cn3ko/spindex-pub" rel="noopener">Source on GitHub</a>
     </div>
-    <div class="dl-meta">Windows 10/11 · 64-bit · ~250&nbsp;MB · <span id="dl-file">SpinDex setup .exe</span></div>
+    <div class="dl-meta">Windows 10/11 · 64-bit · ~110&nbsp;MB · <span id="dl-file">SpinDex setup .exe</span> · <a href="https://github.com/cn3ko/spindex-pub/releases" rel="noopener" style="text-decoration:underline">all releases</a></div>
   </div>
 </header>
 
@@ -844,9 +847,9 @@
 
 <script>
   // ---- download link: stable filename, never needs editing per release ----
-  // Points at the releases repo; the stable file name means this never
-  // changes per release.
-  var REPO = "https://github.com/cn3ko/spindex-releases";
+  // Points at the newest GitHub release of the public repo; the stable file
+  // name means this never changes per release.
+  var REPO = "https://github.com/cn3ko/spindex-pub";
   var WIN_FILE = "SpinDex-Setup-x64.exe";
   var WIN_URL = REPO + "/releases/latest/download/" + WIN_FILE;
   document.getElementById("dl-win").href = WIN_URL;
