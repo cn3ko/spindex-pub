@@ -1,0 +1,37 @@
+/* Self-hosted fonts — deliberately NOT loaded from fonts.googleapis.com.
+   Loading Google Fonts from Google's own CDN transmits a visitor's IP to
+   Google on every page view without consent, which a German court (LG
+   München I, Jan 2022) held to be a GDPR violation — it triggered a real
+   wave of mass cease-and-desist letters against small German site
+   operators specifically over this. Self-hosting removes the third-party
+   request entirely, so there is nothing to transmit.
+
+   Each file below is the single variable-font woff2 Google itself serves
+   for the weight range this site uses (confirmed by inspecting Google's
+   own CSS2 API response: requesting several static weights of Archivo,
+   Inter, or JetBrains Mono returns the SAME url() for all of them — one
+   variable font binary covers the whole range), Latin subset only (covers
+   English and German, including ä/ö/ü/ß, which live in the same Latin-1
+   range Google's own "latin" subset already ships).
+*/
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url('archivo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('inter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('jetbrainsmono.woff2') format('woff2');
+}

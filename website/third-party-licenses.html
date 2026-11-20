@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SpinDex — Third-party licences</title>
+<link rel="icon" href="logo.png" />
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  :root{
+    --void:#0d0f12; --panel:#14171c; --line:#262c37;
+    --tx-0:#e8eaee; --tx-1:#9aa3b2; --tx-2:#5c6575; --accent:#38d6c4;
+    --f-display:"Archivo",system-ui,sans-serif;
+    --f-body:"Inter",system-ui,sans-serif;
+    --f-mono:"JetBrains Mono","Consolas",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--void);color:var(--tx-0);font-family:var(--f-body);line-height:1.6;font-size:16px}
+  .wrap{max-width:680px;margin:0 auto;padding:60px 28px 100px}
+  a{color:var(--accent)}
+  .back{font-family:var(--f-mono);font-size:.82rem;color:var(--tx-2);display:inline-block;margin-bottom:34px}
+  h1{font-family:var(--f-display);font-weight:800;font-size:1.8rem;margin-bottom:8px}
+  .intro{color:var(--tx-1);margin-bottom:8px}
+  .rule{
+    margin:16px 0 36px;padding:14px 18px;border-radius:10px;
+    background:rgba(56,214,196,.07);border:1px solid rgba(56,214,196,.22);
+    color:var(--tx-1);font-size:.92rem;
+  }
+  .rule b{color:var(--tx-0)}
+
+  h2{
+    font-family:var(--f-display);font-weight:700;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--tx-2);margin:44px 0 18px;
+  }
+  h2:first-of-type{margin-top:0}
+
+  .comp{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:20px 22px;margin-bottom:14px;
+  }
+  .comp h3{font-family:var(--f-display);font-weight:700;font-size:1.02rem;margin-bottom:2px}
+  .comp .attrib{color:var(--tx-2);font-size:.82rem;margin-bottom:12px}
+  .comp dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.9rem}
+  .comp dt{color:var(--tx-2);font-family:var(--f-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+  .comp dd{color:var(--tx-1)}
+  .comp dd code{font-family:var(--f-mono);font-size:.84em;color:var(--tx-0);background:var(--void);padding:1px 5px;border-radius:4px}
+  .comp .note{color:var(--tx-2);font-size:.86rem;margin-top:2px}
+  .comp .caveat{
+    color:var(--tx-1);font-size:.86rem;margin-top:12px;padding:10px 12px;
+    background:rgba(240,166,60,.08);border:1px solid rgba(240,166,60,.28);border-radius:8px;
+  }
+  .comp .caveat b{color:#f0a63c}
+
+  .permissive-list{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px 22px;font-family:var(--f-mono);font-size:.86rem;color:var(--tx-1);
+    display:flex;flex-wrap:wrap;gap:8px 20px;
+  }
+
+  .services{display:flex;flex-direction:column;gap:10px}
+  .service{display:flex;justify-content:space-between;gap:16px;font-size:.94rem}
+  .service .name{color:var(--tx-0)}
+  .service .about{color:var(--tx-2);text-align:right}
+
+  footer.note{margin-top:40px;color:var(--tx-2);font-size:.86rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; back to spindex</a>
+  <h1>Third-party components and licences</h1>
+  <p class="intro">SpinDex itself is MIT-licensed — see its <a href="license.html">licence</a>. That governs SpinDex's own code only; it says nothing about what SpinDex is built from, which is what the rest of this page covers.</p>
+  <div class="rule">
+    <b>The guiding rule for the installer:</b> SpinDex ships only its own binaries and permissively-licensed components (plus a few unmodified MPL-2.0 libraries, listed below). Nothing under the GPL, LGPL or CC&nbsp;BY-SA is shipped inside it — those are fetched from their own publishers, onto your own machine, only when you choose to enable the features that need them.
+  </div>
+
+  <h2>Shipped in the installer — machine-learning models</h2>
+
+  <div class="comp">
+    <h3>Beat This!</h3>
+    <div class="attrib">CPJKU / Johannes Kepler University Linz — ISMIR 2024</div>
+    <dl>
+      <dt>Purpose</dt><dd>Beat and tempo (BPM) detection</dd>
+      <dt>Licence</dt><dd>MIT — stated explicitly in the repo: &ldquo;the code and the published model weights are released under the MIT license&rdquo;</dd>
+      <dt>Source</dt><dd><a href="https://github.com/CPJKU/beat_this">github.com/CPJKU/beat_this</a></dd>
+    </dl>
+    <p class="note">The bundled file is an ONNX export of the official checkpoint, obtained from <a href="https://github.com/mosynthkey/beat_this_cpp">mosynthkey/beat_this_cpp</a> — that repo's own code is MIT too, but it explicitly defers to the original for the model's own terms rather than asserting separate rights over it.</p>
+    <p class="caveat"><b>Worth knowing:</b> the same repo also states that &ldquo;some of the training files are fully copyrighted or under limited Creative Commons licenses, and it is up to the user to assess whether this may impact their use case.&rdquo; That's the authors themselves flagging that the model's training data has murky provenance. A permissive licence on the resulting weights doesn't resolve that — it's an open question across the ML field generally, not something this page can close out on your behalf.</p>
+  </div>
+
+  <div class="comp">
+    <h3>OpenKeyScan v3</h3>
+    <div class="attrib">rekordcloud</div>
+    <dl>
+      <dt>Purpose</dt><dd>Musical key detection, reported in Camelot notation</dd>
+      <dt>Licence</dt><dd>MIT (repo-wide licence file) — weaker confidence than Beat This! above: there's no statement that the licence explicitly covers the model checkpoint, only a generic repo-wide MIT file. Treated as MIT by the conventional reading, not because the authors said so directly about the weights.</dd>
+      <dt>Source</dt><dd><a href="https://github.com/rekordcloud/openkeyscan-analyzer">github.com/rekordcloud/openkeyscan-analyzer</a></dd>
+    </dl>
+    <p class="note">The bundled <code>spindex-key.onnx</code> is an ONNX conversion of the published <code>openkeyscan3.pt</code> checkpoint.</p>
+  </div>
+
+  <h2>Shipped in the installer — compiled into SpinDex's executables</h2>
+  <p class="intro" style="margin-bottom:14px">Almost all permissive (MIT / Apache-2.0 / BSD / ISC / Zlib / Unicode-3.0 / public domain). Copyright notices are retained in the binaries. The exceptions: <b>MPL-2.0</b> — cssparser, cssparser-macros, selectors, dtoa-short (via Tauri) and option-ext, used unmodified, source on <a href="https://crates.io/">crates.io</a>, licence at <a href="https://mozilla.org/MPL/2.0/">mozilla.org/MPL/2.0</a>; and <b>CDLA-Permissive-2.0</b> — webpki-roots, webpki-root-certs (the root-certificate list for the optional online lookup).</p>
+  <div class="permissive-list">
+    <span>ONNX Runtime</span><span>Tauri</span><span>React</span><span>React-DOM</span>
+    <span>TypeScript</span><span>Vite</span><span>TanStack Virtual</span><span>rusqlite</span>
+    <span>SQLite</span><span>lofty</span><span>rustfft</span><span>sha2</span>
+    <span>serde</span><span>anyhow</span><span>walkdir</span><span>tracing</span>
+    <span>ureq</span><span>windows-sys</span>
+  </div>
+
+  <h2>This website</h2>
+  <p class="intro" style="margin-bottom:14px">The fonts Archivo, Inter and JetBrains Mono are self-hosted under the SIL Open Font License 1.1 — see <a href="fonts/OFL.txt">fonts/OFL.txt</a>.</p>
+
+  <h2>Not shipped — you install these yourself</h2>
+  <p class="intro" style="margin-bottom:14px">Downloaded from their own publishers by <code style="font-family:var(--f-mono);background:var(--panel);padding:1px 5px;border-radius:4px">install-components.ps1</code> (ffmpeg) or <code style="font-family:var(--f-mono);background:var(--panel);padding:1px 5px;border-radius:4px">setup-apollo.ps1</code> (Apollo). SpinDex neither redistributes nor relicenses them — each stays the property of its authors under its own terms, and SpinDex works without them.</p>
+
+  <div class="comp">
+    <h3>FFmpeg</h3>
+    <dl>
+      <dt>Purpose</dt><dd>Audio decoding for analysis and quality measurement, aiff transcoding for playback, and the audio written by Enhance / Steady tempo / Restore</dd>
+      <dt>Licence</dt><dd>GNU General Public License v3</dd>
+      <dt>Source</dt><dd><a href="https://ffmpeg.org/download.html">ffmpeg.org</a></dd>
+    </dl>
+    <p class="note">SpinDex invokes <code>ffmpeg.exe</code> as a separate process and doesn't link against it — since it's never distributed with SpinDex, the GPLv3 applies only to the copy on your own machine.</p>
+  </div>
+
+
+  <div class="comp">
+    <h3>Apollo</h3>
+    <div class="attrib">JusperLee — &ldquo;Apollo: Band-sequence Modeling for High-Quality Music Restoration in Compressed Audio&rdquo;</div>
+    <dl>
+      <dt>Purpose</dt><dd>Optional ML restoration of audio damaged by heavy lossy compression</dd>
+      <dt>Licence</dt><dd>Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0) — a share-alike licence, which is exactly why it's never bundled</dd>
+      <dt>Source</dt><dd><a href="https://github.com/JusperLee/Apollo">github.com/JusperLee/Apollo</a>, weights on <a href="https://huggingface.co/JusperLee/Apollo">Hugging Face</a></dd>
+    </dl>
+    <p class="note">Installed by <code>setup-apollo.ps1</code> alongside a private Python environment (PyTorch, BSD-3-Clause). The Restore feature stays hidden until those files exist.</p>
+    <p class="caveat"><b>Worth knowing:</b> Creative Commons itself recommends against using CC licences for software, since they weren't drafted with linking or binary-distribution mechanics in mind — that's Apollo's author's choice, not something this project can smooth over. Spawning it as a separate process rather than incorporating its code is the standard, reasonable defensive argument for why share-alike doesn't attach to SpinDex itself — but it's an untested argument, not a legally settled one.</p>
+  </div>
+
+  <p class="intro" style="margin-top:20px">Full text: <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+
+  <h2>Online services</h2>
+  <p class="intro" style="margin-bottom:14px">Used only by the optional, explicitly user-invoked "Fetch online" action in the metadata editor. No account required, and nothing is sent but a text query (artist and title).</p>
+  <div class="services">
+    <div class="service"><span class="name">MusicBrainz</span><span class="about">Open data — <a href="https://musicbrainz.org/">musicbrainz.org</a></span></div>
+  </div>
+
+  <footer class="note">A machine-readable inventory of every dependency can be produced with <code style="font-family:var(--f-mono)">cargo tree</code> from the Rust side and <code style="font-family:var(--f-mono)">npm ls --all</code> from the frontend.</footer>
+</div>
+</body>
+</html>

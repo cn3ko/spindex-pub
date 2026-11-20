@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>SpinDex demo</title></head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const v = Date.now();
+      document.write('<link rel="stylesheet" href="bundle.css?' + v + '">');
+      document.write('<script src="bundle.js?' + v + '"><\/script>');
+    </script>
+  </body>
+</html>

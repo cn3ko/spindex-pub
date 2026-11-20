@@ -1,0 +1,47 @@
+/target
+/mvp
+/docs
+docs/
+.vscode/
+*.db
+*.db-shm
+*.db-wal
+node_modules/
+dist/
+src-tauri/binaries/
+analyzer/.vcpkg/
+analyzer/build/
+# Git worktrees for isolated implementation (see CLAUDE.md)
+.worktrees/
+
+scripts/viz-smoke/bundle.js
+
+# Superpowers tool scratch state (brainstorm servers, pids)
+.superpowers/
+scripts/gridmath-check/check.mjs
+scripts/deck-smoke/bundle.js
+scripts/deck-smoke/bundle.css
+scripts/deck-smoke/wave.bin
+scripts/deck-smoke/loop-test.wav
+scripts/shortcuts-check/check.mjs
+scripts/chords-check/check.mjs
+scripts/frontend-check/check.mjs
+scripts/demo-shots/bundle.js
+scripts/demo-shots/bundle.css
+scripts/demo-shots/out/
+scripts/demo-shots/silence.wav
+scripts/split-smoke/bundle.js
+scripts/split-smoke/bundle.css
+
+# Never in the repo: editor settings, test data, docs and project notes
+# (they stay local; see CLAUDE.md "Repo content rule")
+.vscode/
+docs/
+CLAUDE.md
+TODO.md
+RELEASING.md
+src-tauri/tests/fixtures/
+src-tauri/tests/golden/
+
+# The one current installer (built by npm run tauri build, copied here)
+/release/

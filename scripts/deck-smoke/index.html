@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>deck smoke</title></head>
+  <body style="margin:0">
+    <div id="root"></div>
+    <!-- cache-busted, so a rebuilt bundle is always the one rendered -->
+    <script>
+      const v = Date.now();
+      document.write('<link rel="stylesheet" href="bundle.css?' + v + '">');
+      document.write('<script src="bundle.js?' + v + '"><\/script>');
+    </script>
+  </body>
+</html>

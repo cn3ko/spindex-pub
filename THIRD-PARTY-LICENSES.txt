@@ -1,0 +1,139 @@
+SpinDex — Third-Party Components and Licenses
+==============================================
+
+SpinDex itself is licensed under the MIT License (see LICENSE). That
+governs SpinDex's own code only — it says nothing about what SpinDex is
+built from, which is what the rest of this file covers.
+
+The guiding rule for this installer: **SpinDex distributes only its own
+binaries and permissively-licensed components** (plus a few unmodified
+MPL-2.0 libraries, listed below). Nothing under the GPL,
+LGPL or CC BY-SA is shipped inside it. Components with those
+terms are fetched from their own publishers onto your machine, by you, when
+you choose to enable the features that need them.
+
+
+--------------------------------------------------------------------------------
+PART 1 — SHIPPED IN THE INSTALLER
+--------------------------------------------------------------------------------
+
+Machine-learning models (data files, loaded at analysis time)
+
+  Beat This!  (CPJKU / Johannes Kepler University Linz, ISMIR 2024)
+    Purpose : beat and tempo (BPM) detection
+    License : MIT — stated explicitly in the repo: "The code and the
+              published model weights are released under the MIT license."
+    Source  : https://github.com/CPJKU/beat_this
+    Note    : the bundled file is an ONNX export of the official checkpoint,
+              obtained from https://github.com/mosynthkey/beat_this_cpp (MIT
+              for that repo's own code; that repo explicitly defers to
+              CPJKU's terms for the model itself rather than asserting its
+              own — verified 2026-08-26, no separate claim found).
+    Caveat  : CPJKU's own repo also states "some of the training files are
+              fully copyrighted or under limited Creative Commons licenses,
+              and it is up to the user to assess whether this may impact
+              their use case." That is the authors disclosing that the
+              model's training-data provenance is not fully clean and
+              explicitly leaving that assessment to downstream users. An
+              MIT license on the resulting weights governs redistribution
+              of those weights; it does not resolve whether training on
+              that corpus was itself permissible, which is an unsettled
+              question industry-wide, not something this project can close.
+
+  OpenKeyScan v3  (rekordcloud)
+    Purpose : musical key detection, reported in Camelot notation
+    License : MIT (repo-wide LICENSE file) — weaker confidence than Beat
+              This! above: the repo has no explicit statement that the MIT
+              grant covers the .pt checkpoint specifically, only a generic
+              LICENSE file covering the repository. Treated here as MIT by
+              the conventional reading (a repo-wide LICENSE covers
+              everything in it absent a stated exception), not because the
+              authors said so directly the way CPJKU did — verified
+              2026-08-26.
+    Source  : https://github.com/rekordcloud/openkeyscan-analyzer
+    Based on: MusicalKeyCNN by a1ex90 (MIT),
+              https://github.com/a1ex90/MusicalKeyCNN — OpenKeyScan states it
+              "is based on and extends the original MusicalKeyCNN
+              implementation"
+    Note    : the bundled `spindex-key.onnx` is an ONNX conversion of the
+              published `openkeyscan3.pt` checkpoint, produced by
+              scripts/convert-key-model.py in this repository
+
+Compiled into SpinDex's own executables. Almost all are permissive (MIT /
+Apache-2.0 / BSD / ISC / Zlib / Unicode-3.0 / public domain); the exceptions
+are listed below. Their copyright notices are retained in the binaries.
+
+  MPL-2.0 (file-level copyleft; used unmodified, so SpinDex's own code is
+  not affected). Source for each is available at https://crates.io/crates/<name>
+  and the license text at https://mozilla.org/MPL/2.0/ :
+    cssparser, cssparser-macros, selectors, dtoa-short  (via Tauri)
+    option-ext                                           (via dirs)
+
+  CDLA-Permissive-2.0 (the Mozilla root-certificate list, used by ureq for
+  the optional "Fetch online" lookup; https://cdla.dev/permissive-2-0/):
+    webpki-roots, webpki-root-certs
+
+
+  ONNX Runtime (Microsoft)   MIT       https://github.com/microsoft/onnxruntime
+  Tauri                      MIT/Apache-2.0  https://github.com/tauri-apps/tauri
+  React, React-DOM           MIT       https://react.dev/
+  TypeScript, Vite           MIT/Apache-2.0
+  TanStack Virtual           MIT
+  rusqlite / SQLite          MIT / public domain
+  lofty                      MIT/Apache-2.0  (audio tag reading and writing)
+  rustfft, sha2, serde, anyhow, walkdir, tracing, ureq, windows-sys
+                             MIT/Apache-2.0
+
+A machine-readable inventory of every Rust dependency and its license can be
+produced with `cargo tree` / `cargo license` from src-tauri/, and of every
+frontend dependency with `npm ls --all`.
+
+
+--------------------------------------------------------------------------------
+PART 2 — NOT SHIPPED: OPTIONAL COMPONENTS YOU INSTALL YOURSELF
+--------------------------------------------------------------------------------
+
+These are downloaded from their own publishers by
+`install-components.ps1` (ffmpeg) or `setup-apollo.ps1` (Apollo).
+SpinDex neither redistributes them nor relicenses them; each remains the
+property of its authors under its own terms, and SpinDex works without them.
+
+  FFmpeg
+    Purpose : audio decoding (mp3/flac/aiff/… -> raw PCM) for analysis and
+              quality measurement, aiff transcoding for playback, and the
+              audio written by Enhance / Steady tempo / Restore
+    License : GNU General Public License v3 (the gyan.dev "essentials" build
+              is configured with --enable-gpl --enable-version3)
+    Source  : https://ffmpeg.org/download.html
+              https://www.gyan.dev/ffmpeg/builds/  (build recipes and source)
+    Notes   : SpinDex invokes ffmpeg.exe as a separate process and does not
+              link against it. Because it is not distributed with SpinDex, the
+              GPLv3 attaches only to the copy on your own machine.
+
+  Apollo  (JusperLee, "Apollo: Band-sequence Modeling for High-Quality Music
+          Restoration in Compressed Audio")
+    Purpose : optional ML restoration of audio damaged by heavy lossy
+              compression
+    License : Creative Commons Attribution-ShareAlike 4.0 International
+              (CC BY-SA 4.0) — a share-alike license, which is exactly why it
+              is never bundled
+    Source  : https://github.com/JusperLee/Apollo
+              https://huggingface.co/JusperLee/Apollo  (model weights)
+    Notes   : installed by scripts/setup-apollo.ps1 together with a private
+              Python environment (PyTorch, BSD-3-Clause). The Restore feature
+              stays hidden in the UI until those files exist.
+
+The full text of the GPLv3 is at https://www.gnu.org/licenses/ , and
+of CC BY-SA 4.0 at https://creativecommons.org/licenses/by-sa/4.0/ .
+
+
+--------------------------------------------------------------------------------
+PART 3 — ONLINE SERVICES
+--------------------------------------------------------------------------------
+
+Used only by the optional, explicitly user-invoked "Fetch online" action in
+the metadata editor. No account or key is required and nothing is sent but a
+text query (the track's artist and title).
+
+  MusicBrainz  https://musicbrainz.org/    (open data, CC0 / CC BY-NC-SA
+                                            depending on the dataset)
